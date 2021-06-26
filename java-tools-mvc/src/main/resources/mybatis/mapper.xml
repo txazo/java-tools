@@ -1,132 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yupaopao.platform.order.monitor.core.dal.mapper.common.BusinessMapper">
+<mapper namespace="Mapper">
 
-    <resultMap id="BaseResultMap" type="com.yupaopao.platform.order.monitor.core.dal.model.common.BusinessDO">
-        <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="alarm_group" jdbcType="VARCHAR" property="alarmGroup"/>
-        <result column="report_group" jdbcType="VARCHAR" property="reportGroup"/>
-        <result column="alarm_node_code" jdbcType="VARCHAR" property="alarmNodeCode"/>
-        <result column="status" jdbcType="INTEGER" property="status"/>
-        <result column="creator" jdbcType="VARCHAR" property="creator"/>
-        <result column="auditor" jdbcType="VARCHAR" property="auditor"/>
-        <result column="last_modifier" jdbcType="VARCHAR" property="lastModifier"/>
-        <result column="manager" jdbcType="VARCHAR" property="manager"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-    </resultMap>
-
-    <sql id="Base_Column_List">
-        id, `name`, alarm_group, report_group, alarm_node_code, `status`, creator, auditor, last_modifier,
-        manager, create_time, update_time
-    </sql>
+    <!--
+    1、替换Mapper
+    2、表名替换t_table
+    3、Entity别名替换entityAlias
+    4、生成setField
+    -->
 
     <sql id="setField">
-        <set>
-            <if test="name != null">
-                `name` = #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="alarmGroup != null">
-                alarm_group = #{alarmGroup,jdbcType=VARCHAR},
-            </if>
-            <if test="reportGroup != null">
-                report_group = #{reportGroup,jdbcType=VARCHAR},
-            </if>
-            <if test="alarmNodeCode != null">
-                alarm_node_code = #{alarmNodeCode,jdbcType=VARCHAR},
-            </if>
-            <if test="status != null">
-                `status` = #{status,jdbcType=INTEGER},
-            </if>
-            <if test="creator != null">
-                creator = #{creator,jdbcType=VARCHAR},
-            </if>
-            <if test="auditor != null">
-                auditor = #{auditor,jdbcType=VARCHAR},
-            </if>
-            <if test="lastModifier != null">
-                last_modifier = #{lastModifier,jdbcType=VARCHAR},
-            </if>
-            <if test="manager != null">
-                manager = #{manager,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-        </set>
     </sql>
 
-    <insert id="insert"
-            parameterType="com.yupaopao.platform.order.monitor.core.dal.model.common.BusinessDO">
-        INSERT INTO t_business
+    <insert id="insert" parameterType="entityAlias">
+        INSERT INTO t_table
         <include refid="setField"/>
     </insert>
 
-    <update id="updateById"
-            parameterType="com.yupaopao.platform.order.monitor.core.dal.model.common.BusinessDO">
-        UPDATE t_business
+    <update id="update" parameterType="entityAlias">
+        UPDATE t_table
         <include refid="setField"/>
         WHERE id = #{id}
     </update>
 
-    <select id="getById" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM t_business
+    <update id="delete" parameterType="java.lang.Integer">
+        DELETE FROM t_table
+        <include refid="setField"/>
+        WHERE id = #{id}
+    </update>
+
+    <select id="get" resultType="entityAlias">
+        SELECT *
+        FROM t_table
         WHERE id = #{id}
     </select>
 
-    <select id="queryByIdList" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM t_business
+    <select id="getList" resultType="entityAlias">
+        SELECT *
+        FROM t_table
         WHERE id in
         <foreach collection="idList" item="item" index="index" open="(" separator="," close=")">
             #{item}
         </foreach>
     </select>
 
-    <select id="queryBusinessForCount" resultType="long">
-        SELECT count(*)
-        FROM t_business
-        WHERE status != -1
+    <select id="query" resultType="entityAlias">
+        SELECT *
+        FROM t_table
+        WHERE 1 = 1
     </select>
 
-    <select id="queryBusinessByPage" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM t_business
-        WHERE status != -1
-        order by create_time
-        limit #{offset},#{limit}
-    </select>
-
-    <select id="queryBusinessByUpdateTimeBegin" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM t_business
-        WHERE update_time > #{updateTimeBegin}
-    </select>
-
-    <select id="queryByName" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM t_business
-        WHERE status != -1
-        and name = #{name}
-        limit 1
-    </select>
-
-    <select id="getAllBusiness" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM t_business
-        WHERE status != -1
-        order by id
+    <select id="queryTotal" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM t_table
+        WHERE 1 = 1
     </select>
 
 </mapper>

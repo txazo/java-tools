@@ -1,5 +1,6 @@
 package org.txazo.java.tools.mvc.mapper;
 
+import org.apache.ibatis.annotations.Param;
 import org.txazo.java.tools.mvc.common.Query;
 
 import java.util.List;
@@ -14,17 +15,15 @@ public interface BaseMapper<T> {
 
     int insert(T t);
 
-    int batchInsert(List<T> list);
+    // int batchInsert(@Param("list") List<T> list);
 
     int update(T t);
 
-    int delete(Integer id);
+    int delete(@Param("id") Integer id);
 
-    int delete(T t);
+    T get(@Param("id") Integer id);
 
-    T get(Integer id);
-
-    List<T> getList(List<Integer> idList);
+    List<T> getList(@Param("idList") List<Integer> idList);
 
     List<T> query(Query query);
 

@@ -28,7 +28,7 @@ public abstract class AbstractBaseRepository<Entity> implements BaseRepository<E
 
     @Override
     public int batchAdd(List<Entity> entityList) {
-        return getMapper().batchInsert(entityList);
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -39,11 +39,6 @@ public abstract class AbstractBaseRepository<Entity> implements BaseRepository<E
     @Override
     public int delete(Integer id) {
         return getMapper().delete(id);
-    }
-
-    @Override
-    public int delete(Entity entity) {
-        return getMapper().delete(entity);
     }
 
     @Override

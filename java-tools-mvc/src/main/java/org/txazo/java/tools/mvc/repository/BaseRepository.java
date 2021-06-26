@@ -19,8 +19,6 @@ public interface BaseRepository<DTO> {
 
     int delete(Integer id);
 
-    int delete(DTO dto);
-
     DTO get(Integer id);
 
     List<DTO> getList(List<Integer> idList);
