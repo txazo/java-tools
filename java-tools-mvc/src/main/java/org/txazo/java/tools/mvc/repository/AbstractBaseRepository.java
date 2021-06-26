@@ -1,6 +1,5 @@
 package org.txazo.java.tools.mvc.repository;
 
-import org.txazo.java.tools.mvc.common.DoDtoConverter;
 import org.txazo.java.tools.mvc.common.Query;
 import org.txazo.java.tools.mvc.mapper.BaseMapper;
 import org.txazo.java.tools.mvc.result.PageResult;
