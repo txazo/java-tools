@@ -9,7 +9,7 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>txazo-tools-leetcode</artifactId>
+    <artifactId>java-tools-leetcode</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>

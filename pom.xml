@@ -18,7 +18,8 @@
     <url>https://github.com/txazo/java-tools</url>
 
     <modules>
-        <module>txazo-tools-leetcode</module>
+        <module>java-tools-leetcode</module>
+        <module>java-tools-mvc</module>
     </modules>
 
     <properties>
