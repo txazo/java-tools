@@ -3,8 +3,8 @@ package org.txazo.java.tools.mvc.repository;
 import org.txazo.java.tools.mvc.common.Query;
 import org.txazo.java.tools.mvc.mapper.BaseMapper;
 import org.txazo.java.tools.mvc.result.PageResult;
-import org.txazo.java.tools.mvc.util.PageUtil;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -36,28 +36,28 @@ public abstract class AbstractBaseRepository<Entity> implements BaseRepository<E
     }
 
     @Override
-    public int delete(Integer id) {
+    public int delete(Long id) {
         return getMapper().delete(id);
     }
 
     @Override
-    public Entity get(Integer id) {
+    public Entity get(Long id) {
         return getMapper().get(id);
     }
 
     @Override
-    public List<Entity> getList(List<Integer> idList) {
+    public List<Entity> getList(List<Long> idList) {
         return getMapper().getList(idList);
     }
 
     @Override
     public PageResult<Entity> query(Query query) {
-        PageUtil.check(query.getPageNum(), query.getPageSize());
-        query.put("offset", PageUtil.offset(query.getPageNum(), query.getPageSize()));
-        query.put("limit", query.getPageSize());
         int totalCount = getMapper().queryTotal(query);
+        if (totalCount == 0) {
+            return PageResult.newPageResult(totalCount, Collections.emptyList(), false);
+        }
         List<Entity> list = getMapper().query(query);
-        return PageResult.newPageResult(totalCount, list, query.getPageNum(), query.getPageSize());
+        return PageResult.newPageResult(totalCount, list, query);
     }
 
 }

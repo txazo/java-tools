@@ -7,53 +7,79 @@
     2、表名替换t_table
     3、Entity别名替换entityAlias
     4、生成setField
+    5、生成BaseResultMap
     -->
 
+    <resultMap id="BaseResultMap" type="xxx">
+    </resultMap>
+
     <sql id="setField">
+        <set>
+        </set>
     </sql>
 
     <insert id="insert" parameterType="entityAlias">
-        INSERT INTO t_table
+        INSERT INTO t_order
         <include refid="setField"/>
     </insert>
 
     <update id="update" parameterType="entityAlias">
-        UPDATE t_table
+        UPDATE t_order
         <include refid="setField"/>
         WHERE id = #{id}
     </update>
 
-    <update id="delete" parameterType="java.lang.Integer">
-        DELETE FROM t_table
-        <include refid="setField"/>
+    <update id="delete" parameterType="java.lang.Long">
+        DELETE FROM t_order
         WHERE id = #{id}
     </update>
 
-    <select id="get" resultType="entityAlias">
+    <select id="get" parameterType="java.lang.Long" resultMap="BaseResultMap">
         SELECT *
-        FROM t_table
+        FROM t_order
         WHERE id = #{id}
     </select>
 
-    <select id="getList" resultType="entityAlias">
+    <select id="getList" resultMap="BaseResultMap">
         SELECT *
-        FROM t_table
+        FROM t_order
         WHERE id in
         <foreach collection="idList" item="item" index="index" open="(" separator="," close=")">
             #{item}
         </foreach>
     </select>
 
-    <select id="query" resultType="entityAlias">
+    <select id="query" parameterType="org.txazo.java.tools.mvc.common.Query" resultMap="BaseResultMap">
         SELECT *
-        FROM t_table
+        FROM t_order
         WHERE 1 = 1
+        <foreach collection="whereMap.entrySet()" index="key" item="value" open="" close="" separator="">
+            and ${key} = #{value}
+        </foreach>
+        <foreach collection="whereSqlMap.entrySet()" index="key" item="value" open="" close="" separator="">
+            and ${key} #{value}
+        </foreach>
+        <if test="orderByList != null">
+            order by
+            <foreach collection="orderByList" item="item" separator=",">
+                ${item.field} ${item.order}
+            </foreach>
+        </if>
+        <if test="offset != null and limit != null">
+            limit #{offset},#{limit}
+        </if>
     </select>
 
-    <select id="queryTotal" resultType="java.lang.Integer">
+    <select id="queryTotal" parameterType="org.txazo.java.tools.mvc.common.Query" resultType="java.lang.Integer">
         SELECT count(1)
-        FROM t_table
+        FROM t_order
         WHERE 1 = 1
+        <foreach collection="whereMap.entrySet()" index="key" item="value" open="" close="" separator="">
+            and ${key} = #{value}
+        </foreach>
+        <foreach collection="whereSqlMap.entrySet()" index="key" item="value" open="" close="" separator="">
+            and ${key} #{value}
+        </foreach>
     </select>
 
 </mapper>

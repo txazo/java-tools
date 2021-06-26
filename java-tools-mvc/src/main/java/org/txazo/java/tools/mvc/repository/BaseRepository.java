@@ -17,11 +17,11 @@ public interface BaseRepository<DTO> {
 
     int update(DTO dto);
 
-    int delete(Integer id);
+    int delete(Long id);
 
-    DTO get(Integer id);
+    DTO get(Long id);
 
-    List<DTO> getList(List<Integer> idList);
+    List<DTO> getList(List<Long> idList);
 
     PageResult<DTO> query(Query query);
 

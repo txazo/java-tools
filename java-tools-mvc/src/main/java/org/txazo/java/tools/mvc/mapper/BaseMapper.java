@@ -19,11 +19,11 @@ public interface BaseMapper<T> {
 
     int update(T t);
 
-    int delete(@Param("id") Integer id);
+    int delete(@Param("id") Long id);
 
-    T get(@Param("id") Integer id);
+    T get(@Param("id") Long id);
 
-    List<T> getList(@Param("idList") List<Integer> idList);
+    List<T> getList(@Param("idList") List<Long> idList);
 
     List<T> query(Query query);
 
