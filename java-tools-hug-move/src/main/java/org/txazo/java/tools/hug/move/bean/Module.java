@@ -30,6 +30,10 @@ public class Module {
 
     private String basePackage;
 
+    private String newBasePackage;
+
     private String testBasePackage;
+
+    private String newTestBasePackage;
 
 }

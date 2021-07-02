@@ -1,12 +1,16 @@
 package org.txazo.java.tools.hug.move.parse;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.txazo.java.tools.hug.move.bean.MavenDependency;
+import org.txazo.java.tools.hug.move.bean.Module;
+import org.txazo.java.tools.hug.move.bean.Project;
 import org.txazo.java.tools.hug.move.util.JsoupUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -60,6 +64,50 @@ public class AbstractParseUtil {
             mavenDependencyList.add(readMavenDependency(e));
         }
         return mavenDependencyList;
+    }
+
+    protected static void parseJavaBasePackage(Project project) {
+        project.setBasePackage(readJavaBasePackage(project.getProjectFile().getAbsolutePath() + "/src/main/java/com/yupaopao"));
+        project.setTestBasePackage(readJavaBasePackage(project.getProjectFile().getAbsolutePath() + "/src/test/java/com/yupaopao"));
+        if (project.getBasePackage() != null) {
+            project.setNewBasePackage(project.getBasePackage().replace("com.yupaopao", "com.yupaopao.hug"));
+        }
+        if (project.getTestBasePackage() != null) {
+            project.setNewTestBasePackage(project.getTestBasePackage().replace("com.yupaopao", "com.yupaopao.hug"));
+        }
+    }
+
+    protected static void parseJavaBasePackage(Module module) {
+        module.setBasePackage(readJavaBasePackage(module.getModuleFile().getAbsolutePath() + "/src/main/java/com/yupaopao"));
+        module.setTestBasePackage(readJavaBasePackage(module.getModuleFile().getAbsolutePath() + "/src/test/java/com/yupaopao"));
+        if (module.getBasePackage() != null) {
+            module.setNewBasePackage(module.getBasePackage().replace("com.yupaopao", "com.yupaopao.hug"));
+        }
+        if (module.getTestBasePackage() != null) {
+            module.setNewTestBasePackage(module.getTestBasePackage().replace("com.yupaopao", "com.yupaopao.hug"));
+        }
+    }
+
+    protected static String readJavaBasePackage(String basePath) {
+        File currentFile = new File(basePath);
+        if (!currentFile.exists()) {
+            return null;
+        }
+        while (!isLastBasePackage(currentFile)) {
+            File[] childFiles = currentFile.listFiles();
+            if (childFiles == null || childFiles.length < 1) {
+                break;
+            }
+            currentFile = childFiles[0];
+        }
+        String basePackage = currentFile.getAbsolutePath();
+        return basePackage.substring(basePackage.indexOf("com/yupaopao")).replaceAll("/", ".");
+    }
+
+    protected static boolean isLastBasePackage(File file) {
+        File[] childFiles = file.listFiles();
+        return ArrayUtils.isEmpty(childFiles) ||
+                !(childFiles != null && childFiles.length == 1 && childFiles[0].isDirectory());
     }
 
 }

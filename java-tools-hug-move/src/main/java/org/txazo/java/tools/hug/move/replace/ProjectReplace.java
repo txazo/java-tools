@@ -14,7 +14,16 @@ import java.io.File;
 public class ProjectReplace {
 
     public static void replace(Project project) throws Exception {
+        // 删除target、*.iml
         removeInvalidFile(project);
+        // 扫描文件替换
+        FileReplace.replace(project);
+        if (project.getModuleList() != null) {
+            for (Module m : project.getModuleList()) {
+                PackageReplace.replace(m);
+            }
+        }
+        PackageReplace.replace(project);
     }
 
     private static void removeInvalidFile(Project project) throws Exception {
@@ -27,7 +36,7 @@ public class ProjectReplace {
     }
 
     private static void removeInvalidFile(File file) throws Exception {
-        FileUtils.deleteDirectory(new File(file.getAbsoluteFile() + "/target"));
+        deleteDirectory(new File(file.getAbsoluteFile() + "/target"));
         File[] childFileList = file.listFiles();
         if (childFileList != null && childFileList.length > 0) {
             for (File f : childFileList) {
@@ -36,6 +45,24 @@ public class ProjectReplace {
                 }
             }
         }
+    }
+
+    private static void deleteDirectory(File file) throws Exception {
+        if (!file.exists() || !file.isDirectory()) {
+            return;
+        }
+
+        File[] childFileList = file.listFiles();
+        if (childFileList != null && childFileList.length > 0) {
+            for (File f : childFileList) {
+                if (f.isDirectory()) {
+                    deleteDirectory(f);
+                } else {
+                    FileUtils.forceDelete(f);
+                }
+            }
+        }
+        FileUtils.deleteDirectory(file);
     }
 
 }

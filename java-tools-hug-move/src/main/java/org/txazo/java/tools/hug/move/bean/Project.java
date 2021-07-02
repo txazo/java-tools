@@ -16,6 +16,8 @@ public class Project {
 
     private String projectName;
 
+    private String newProjectName;
+
     private MavenDependency maven;
 
     private String packaging;
@@ -27,5 +29,13 @@ public class Project {
     private List<MavenDependency> dependencyList;
 
     private String mainClass;
+
+    private String basePackage;
+
+    private String newBasePackage;
+
+    private String testBasePackage;
+
+    private String newTestBasePackage;
 
 }

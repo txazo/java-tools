@@ -22,7 +22,7 @@ public class ApplicationMain {
         if (CollectionUtils.isNotEmpty(project.getModuleNameList())) {
             List<Module> moduleList = new ArrayList<>();
             for (String moduleName : project.getModuleNameList()) {
-                moduleList.add(ModuleParseUtil.parseModule(projectPath + "/" + moduleName));
+                moduleList.add(ModuleParseUtil.parseModule(project, projectPath + "/" + moduleName));
             }
             project.setModuleList(moduleList);
         }
