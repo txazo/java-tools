@@ -18,7 +18,7 @@ public class PackageReplace {
         // 模块重命名
         ShellUtil.runShell(String.format("cd ..; mv %s %s",
                 project.getProjectName(), "hug-" + project.getProjectName()),
-                project.getProjectFile());
+                project.getProjectFile(), true);
     }
 
     public static void replace(Module module) throws Exception {
@@ -27,7 +27,7 @@ public class PackageReplace {
         // 模块重命名
         ShellUtil.runShell(String.format("cd ..; mv %s %s",
                 module.getModuleFileName(), "hug-" + module.getModuleFileName()),
-                module.getModuleFile());
+                module.getModuleFile(), true);
     }
 
     public static void replacePackage(File file, String basePackage, boolean test) throws Exception {
@@ -43,7 +43,8 @@ public class PackageReplace {
         String subName = leftPackage.substring(0, leftPackage.indexOf("."));
 
         // 修改包路径
-        ShellUtil.runShell(String.format("mkdir hug; mv %s hug", subName), yupaopaoFile);
+        ShellUtil.runShell("mkdir hug", yupaopaoFile, true);
+        ShellUtil.runShell(String.format("mv %s hug", subName), yupaopaoFile, false);
     }
 
 }
