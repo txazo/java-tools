@@ -28,7 +28,7 @@ public class PomReplace {
     private static int tempArtifactIdLineNum;
 
     private static final List<String> TEMP_DEPENDENCY_LIST = new ArrayList<>();
-    private static final List<String> tempExclusionList = new ArrayList<>();
+    private static final List<String> TEMP_EXCLUSION_LIST = new ArrayList<>();
 
     public static void replace(File file, List<MavenDependency> mavenList) throws Exception {
         File pomFile = new File(file.getAbsolutePath() + "/pom.xml");
@@ -50,7 +50,7 @@ public class PomReplace {
                     if (START_TAG.matcher(line).matches()) {
                         PATH = PATH + "." + parseTag(line);
                         if (matchMavenExclusionsTag()) {
-                            tempExclusionList.add(line);
+                            TEMP_EXCLUSION_LIST.add(line);
                         } else {
                             result.add(line);
                         }
@@ -58,7 +58,7 @@ public class PomReplace {
                         String tag = parseTag(line);
                         boolean addLine = true;
                         if (matchMavenExclusionsTag()) {
-                            tempExclusionList.add(line);
+                            TEMP_EXCLUSION_LIST.add(line);
                             addLine = false;
                         }
                         if (!PATH.equals("project")) {
@@ -82,7 +82,7 @@ public class PomReplace {
                             }
                             TEMP_DEPENDENCY_LIST.add(line);
                         } else if (matchMavenExclusionsTag()) {
-                            tempExclusionList.add(line);
+                            TEMP_EXCLUSION_LIST.add(line);
                         } else if (matchTag("project.groupId", tag)) {
                             result.add(line.replaceAll("com.yupaopao.", "com.yupaopao.hug."));
                         } else if (matchTag("project.artifactId", tag)) {
@@ -172,14 +172,14 @@ public class PomReplace {
             }
         }
 
-        result.addAll(tempExclusionList);
+        result.addAll(TEMP_EXCLUSION_LIST);
 
         tempGroupIdLine = null;
         tempArtifactIdLine = null;
         tempGroupIdLineNum = -1;
         tempArtifactIdLineNum = -1;
         TEMP_DEPENDENCY_LIST.clear();
-        tempExclusionList.clear();
+        TEMP_EXCLUSION_LIST.clear();
     }
 
 }
