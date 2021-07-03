@@ -28,7 +28,7 @@ public class ApplicationMain {
 
         ShellUtil.runShell("rm -rf " + projectName, new File(workPath), true);
         ShellUtil.runShell("rm -rf hug-" + projectName, new File(workPath), true);
-        ShellUtil.runShell("git clone " + originGit, new File(workPath), true);
+        ShellUtil.runShell("git clone " + originGit, new File(workPath), false);
         ShellUtil.runShell("cd " + projectName, new File(workPath), false);
         ShellUtil.runShell("rm -rf .git", new File(projectPath), false);
 
@@ -41,6 +41,7 @@ public class ApplicationMain {
             project.setModuleList(moduleList);
         }
 
+        System.out.println("开始执行项目替换...");
         ProjectReplace.replace(project);
 
         ShellUtil.runShell("git init", new File(newProjectPath), true);

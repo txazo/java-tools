@@ -27,8 +27,8 @@ public class PomReplace {
     private static String tempArtifactIdLine;
     private static int tempArtifactIdLineNum;
 
-    private static List<String> tempDependencyList = new ArrayList<>();
-    private static List<String> tempExclusionList = new ArrayList<>();
+    private static final List<String> TEMP_DEPENDENCY_LIST = new ArrayList<>();
+    private static final List<String> tempExclusionList = new ArrayList<>();
 
     public static void replace(File file, List<MavenDependency> mavenList) throws Exception {
         File pomFile = new File(file.getAbsolutePath() + "/pom.xml");
@@ -75,12 +75,12 @@ public class PomReplace {
                         if (matchMavenTag()) {
                             if (matchMavenTag("groupId", tag)) {
                                 tempGroupIdLine = line;
-                                tempGroupIdLineNum = tempDependencyList.size();
+                                tempGroupIdLineNum = TEMP_DEPENDENCY_LIST.size();
                             } else if (matchMavenTag("artifactId", tag)) {
                                 tempArtifactIdLine = line;
-                                tempArtifactIdLineNum = tempDependencyList.size();
+                                tempArtifactIdLineNum = TEMP_DEPENDENCY_LIST.size();
                             }
-                            tempDependencyList.add(line);
+                            TEMP_DEPENDENCY_LIST.add(line);
                         } else if (matchMavenExclusionsTag()) {
                             tempExclusionList.add(line);
                         } else if (matchTag("project.groupId", tag)) {
@@ -161,8 +161,8 @@ public class PomReplace {
             }
         }
 
-        for (int i = 0; i < tempDependencyList.size(); i++) {
-            String line = tempDependencyList.get(i);
+        for (int i = 0; i < TEMP_DEPENDENCY_LIST.size(); i++) {
+            String line = TEMP_DEPENDENCY_LIST.get(i);
             if (match && i == tempGroupIdLineNum) {
                 result.add(line.replaceAll("com.yupaopao.", "com.yupaopao.hug."));
             } else if (match && i == tempArtifactIdLineNum) {
@@ -178,7 +178,7 @@ public class PomReplace {
         tempArtifactIdLine = null;
         tempGroupIdLineNum = -1;
         tempArtifactIdLineNum = -1;
-        tempDependencyList.clear();
+        TEMP_DEPENDENCY_LIST.clear();
         tempExclusionList.clear();
     }
 
