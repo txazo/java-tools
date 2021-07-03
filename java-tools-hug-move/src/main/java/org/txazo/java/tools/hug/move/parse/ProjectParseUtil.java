@@ -32,6 +32,7 @@ public class ProjectParseUtil extends AbstractParseUtil {
         project.setModuleNameList(JsoupUtil.readElementValueList(document, "project > modules > module"));
         project.setDependencyList(readMavenDependencyList(document, "project > dependencyManagement > dependencies > dependency"));
         project.getDependencyList().addAll(readMavenDependencyList(document, "project > dependencies > dependency"));
+        project.setBuildFinalName(JsoupUtil.readElementValue(document, "project > build > finalName"));
         project.setMainClass(JsoupUtil.readElementValue(document, "project mainClass"));
         parseJavaBasePackage(project);
         checkProjectName(project);

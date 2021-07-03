@@ -28,6 +28,8 @@ public class Project {
 
     private List<MavenDependency> dependencyList;
 
+    private String buildFinalName;
+
     private String mainClass;
 
     private String basePackage;

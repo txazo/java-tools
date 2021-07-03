@@ -16,9 +16,9 @@ public class PackageReplace {
         replacePackage(project.getProjectFile(), project.getBasePackage(), false);
         replacePackage(project.getProjectFile(), project.getTestBasePackage(), true);
         // 模块重命名
-//        ShellUtil.runShell(String.format("cd ..; mv %s %s",
-//                project.getProjectName(), "hug-" + project.getProjectName()),
-//                project.getProjectFile());
+        ShellUtil.runShell(String.format("cd ..; mv %s %s",
+                project.getProjectName(), "hug-" + project.getProjectName()),
+                project.getProjectFile());
     }
 
     public static void replace(Module module) throws Exception {
