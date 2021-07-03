@@ -17,7 +17,7 @@ import java.util.List;
 public class ApplicationMain {
 
     public static void main(String[] args) throws Exception {
-        String projectPath = "/Users/dzsb-000852/Bixin/order-base-service";
+        String projectPath = "/Users/dzsb-000852/Bixin/order-query-service";
         Project project = ProjectParseUtil.parseProject(projectPath);
         if (CollectionUtils.isNotEmpty(project.getModuleNameList())) {
             List<Module> moduleList = new ArrayList<>();

@@ -70,10 +70,10 @@ public class AbstractParseUtil {
         project.setBasePackage(readJavaBasePackage(project.getProjectFile().getAbsolutePath() + "/src/main/java/com/yupaopao"));
         project.setTestBasePackage(readJavaBasePackage(project.getProjectFile().getAbsolutePath() + "/src/test/java/com/yupaopao"));
         if (project.getBasePackage() != null) {
-            project.setNewBasePackage(project.getBasePackage().replace("com.yupaopao", "com.yupaopao.hug"));
+            project.setNewBasePackage(project.getBasePackage().replaceAll("com.yupaopao", "com.yupaopao.hug"));
         }
         if (project.getTestBasePackage() != null) {
-            project.setNewTestBasePackage(project.getTestBasePackage().replace("com.yupaopao", "com.yupaopao.hug"));
+            project.setNewTestBasePackage(project.getTestBasePackage().replaceAll("com.yupaopao", "com.yupaopao.hug"));
         }
     }
 
@@ -81,10 +81,10 @@ public class AbstractParseUtil {
         module.setBasePackage(readJavaBasePackage(module.getModuleFile().getAbsolutePath() + "/src/main/java/com/yupaopao"));
         module.setTestBasePackage(readJavaBasePackage(module.getModuleFile().getAbsolutePath() + "/src/test/java/com/yupaopao"));
         if (module.getBasePackage() != null) {
-            module.setNewBasePackage(module.getBasePackage().replace("com.yupaopao", "com.yupaopao.hug"));
+            module.setNewBasePackage(module.getBasePackage().replaceAll("com.yupaopao", "com.yupaopao.hug"));
         }
         if (module.getTestBasePackage() != null) {
-            module.setNewTestBasePackage(module.getTestBasePackage().replace("com.yupaopao", "com.yupaopao.hug"));
+            module.setNewTestBasePackage(module.getTestBasePackage().replaceAll("com.yupaopao", "com.yupaopao.hug"));
         }
     }
 

@@ -19,7 +19,7 @@ public class JsoupUtil {
             return null;
         }
 
-        return elements.get(0).childNodes().get(0).outerHtml().replace("\n", "");
+        return elements.get(0).childNodes().get(0).outerHtml().replaceAll("\n", "");
     }
 
     public static List<String> readElementValueList(Element element, String cssQuery) {
@@ -30,7 +30,7 @@ public class JsoupUtil {
 
         List<String> list = new ArrayList<>();
         for (Element e : elements) {
-            list.add(e.childNodes().get(0).outerHtml().replace("\n", ""));
+            list.add(e.childNodes().get(0).outerHtml().replaceAll("\\s", ""));
         }
         return list;
     }

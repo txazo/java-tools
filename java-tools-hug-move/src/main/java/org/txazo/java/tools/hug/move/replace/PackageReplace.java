@@ -39,7 +39,7 @@ public class PackageReplace {
         if (!yupaopaoFile.exists()) {
             return;
         }
-        String leftPackage = basePackage.replace("com.yupaopao.", "");
+        String leftPackage = basePackage.replaceAll("com.yupaopao.", "");
         String subName = leftPackage.substring(0, leftPackage.indexOf("."));
 
         // 修改包路径

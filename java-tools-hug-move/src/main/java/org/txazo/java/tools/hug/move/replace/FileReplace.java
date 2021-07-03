@@ -53,7 +53,7 @@ public class FileReplace {
             return replaceCatAppProperties(project, file, line);
         } else if (file.getAbsolutePath().endsWith("/resources/application.properties")) {
             return replaceApplicationProperties(project, file, line);
-        } else if (file.getAbsolutePath().contains("/resources/META-INF/")) {
+        } else if (file.getAbsolutePath().contains("/resources/")) {
             return replaceJavaPackage(project, file, line);
         }
         return line;

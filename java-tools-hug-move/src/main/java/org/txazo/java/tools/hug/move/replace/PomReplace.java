@@ -84,7 +84,7 @@ public class PomReplace {
                         } else if (matchMavenExclusionsTag()) {
                             tempExclusionList.add(line);
                         } else if (matchTag("project.groupId", tag)) {
-                            result.add(line.replace("com.yupaopao.", "com.yupaopao.hug."));
+                            result.add(line.replaceAll("com.yupaopao.", "com.yupaopao.hug."));
                         } else if (matchTag("project.artifactId", tag)) {
                             result.add(appendHugToTagText(line));
                         } else if (matchTag("project.name", tag)) {
@@ -94,7 +94,7 @@ public class PomReplace {
                         } else if (matchTag("project.build.finalName", tag)) {
                             result.add(appendHugToTagText(line));
                         } else if (matchTag("project.build.plugins.plugin.configuration.mainClass", tag)) {
-                            result.add(line.replace("com.yupaopao.", "com.yupaopao.hug."));
+                            result.add(line.replaceAll("com.yupaopao.", "com.yupaopao.hug."));
                         } else {
                             result.add(line);
                         }
@@ -164,7 +164,7 @@ public class PomReplace {
         for (int i = 0; i < tempDependencyList.size(); i++) {
             String line = tempDependencyList.get(i);
             if (match && i == tempGroupIdLineNum) {
-                result.add(line.replace("com.yupaopao.", "com.yupaopao.hug."));
+                result.add(line.replaceAll("com.yupaopao.", "com.yupaopao.hug."));
             } else if (match && i == tempArtifactIdLineNum) {
                 result.add(appendHugToTagText(line));
             } else {
