@@ -20,7 +20,7 @@ public class ApplicationMain {
 
     public static void main(String[] args) throws Exception {
         String workPath = "/Users/dzsb-000852/test";
-        String projectName = "order-query-service";
+        String projectName = "order-base-service";
         String projectPath = workPath + "/" + projectName;
         String newProjectPath = workPath + "/hug-" + projectName;
         String originGit = "git@git.yupaopao.com:platform/order-center/" + projectName + ".git";

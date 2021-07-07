@@ -55,6 +55,11 @@ public class FileReplace {
             return replaceApplicationProperties(project, file, line);
         } else if (file.getAbsolutePath().contains("/resources/")) {
             return replaceJavaPackage(project, file, line);
+        } else if (file.getName().equals(".gitignore")) {
+            if (line.trim().equals("*.yml")) {
+                return "";
+            }
+            return line;
         }
         return line;
     }
