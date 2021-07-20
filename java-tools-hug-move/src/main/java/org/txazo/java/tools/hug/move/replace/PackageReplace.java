@@ -40,7 +40,10 @@ public class PackageReplace {
             return;
         }
         String leftPackage = basePackage.replaceAll("com.yupaopao.", "");
-        String subName = leftPackage.substring(0, leftPackage.indexOf("."));
+        String subName = leftPackage;
+        if (leftPackage.indexOf(".") > 0) {
+            subName = leftPackage.substring(0, leftPackage.indexOf("."));
+        }
 
         // 修改包路径
         ShellUtil.runShell("mkdir hug", yupaopaoFile, true);
