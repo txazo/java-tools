@@ -3,26 +3,12 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.6.RELEASE</version>
-    </parent>
-
     <groupId>org.txazo</groupId>
-    <artifactId>java-tools</artifactId>
+    <artifactId>spring-boot-starter</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>java-tools</name>
-    <url>https://github.com/txazo/java-tools</url>
-
-    <modules>
-        <module>java-tools-hug-move</module>
-        <module>java-tools-leetcode</module>
-        <module>java-tools-mvc</module>
-        <module>spring-boot-starter</module>
-    </modules>
+    <name>spring-boot-starter</name>
 
     <properties>
         <java-version>1.8</java-version>
@@ -30,8 +16,21 @@
         <lombok.version>1.18.12</lombok.version>
     </properties>
 
+    <modules>
+        <module>spring-boot-starter-common</module>
+        <module>spring-boot-starter-redis</module>
+    </modules>
+
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>2.3.6.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-framework-bom</artifactId>
@@ -39,16 +38,14 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-        </dependency>
-    </dependencies>
 
     <build>
         <plugins>

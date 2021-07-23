@@ -19,4 +19,8 @@ public class PageUtil {
         return (pageNum - 1) * pageSize;
     }
 
+    public static int limit(Integer pageSize) {
+        return pageSize;
+    }
+
 }
