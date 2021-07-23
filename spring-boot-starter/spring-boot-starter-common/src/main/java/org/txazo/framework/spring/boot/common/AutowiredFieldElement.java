@@ -6,6 +6,10 @@ import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 
+/**
+ * @author tuxiaozhou
+ * @date 2021/7/23
+ */
 public class AutowiredFieldElement<A> extends InjectionMetadata.InjectedElement {
 
     private final Field field;
