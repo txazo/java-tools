@@ -6,7 +6,9 @@ public class Leetcode_5_1 {
      * 动态规划
      */
     public String longestPalindrome(String s) {
-        if (s == null || s.length() < 1) return "";
+        if (s == null || s.length() < 1) {
+            return "";
+        }
         int len = s.length();
         char[] chars = s.toCharArray();
         int max = 1, start = 0;

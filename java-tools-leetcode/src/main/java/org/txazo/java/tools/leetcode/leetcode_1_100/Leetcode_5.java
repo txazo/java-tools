@@ -13,7 +13,9 @@ public class Leetcode_5 {
      * 中心扩散法
      */
     public String longestPalindrome(String s) {
-        if (s == null || s.length() < 1) return "";
+        if (s == null || s.length() < 1) {
+            return "";
+        }
         // [0]，回文子串的起始位置
         // [1]，回文子串的长度
         int[] max = new int[2];
