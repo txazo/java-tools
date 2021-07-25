@@ -11,11 +11,15 @@ package org.txazo.java.tools.leetcode.leetcode_1_100;
  */
 public class Leetcode_19 {
 
+    /**
+     * 双指针法
+     * 尾递归法
+     */
     public ListNode removeNthFromEnd(ListNode head, int n) {
         // 虚拟头节点
         ListNode pre = new ListNode();
         pre.next = head;
-        // 递归法
+        // 尾递归法
         reverse(pre, head, n);
         return pre.next;
     }

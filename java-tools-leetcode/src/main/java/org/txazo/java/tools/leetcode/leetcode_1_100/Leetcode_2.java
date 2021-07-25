@@ -18,6 +18,7 @@ public class Leetcode_2 {
         ListNode head = new ListNode(0);
         // 单指针
         ListNode curr = head;
+        // 进位
         int carry = 0;
         while (l1 != null || l2 != null) {
             int n1 = (l1 != null) ? l1.val : 0;

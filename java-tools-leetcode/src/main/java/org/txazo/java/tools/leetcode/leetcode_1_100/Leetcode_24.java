@@ -26,10 +26,12 @@ public class Leetcode_24 {
         }
         ListNode next = cur.next.next;
 
+        // 两两交换
         pre.next = cur.next;
         pre.next.next = cur;
         cur.next = next;
 
+        // 继续后续交换
         swap(cur, cur.next);
     }
 

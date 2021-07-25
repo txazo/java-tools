@@ -13,13 +13,15 @@ import java.util.Map;
 public class Leetcode_3 {
 
     public int lengthOfLongestSubstring(String s) {
+        // 最大长度
         int max = 0;
+        // 无重复字符的子串左边界
         int left = 0;
         // 哈希表
         Map<Character, Integer> map = new HashMap<>();
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if (map.containsKey(s.charAt(i))) {
+            if (map.containsKey(c)) {
                 // 重置left
                 left = Math.max(left, map.get(c) + 1);
             }
