@@ -1,10 +1,10 @@
-package org.txazo.java.tools.hug.move.util;
+package org.txazo.java.tools.util.shell;
 
 import java.io.File;
 
 /**
  * @author tuxiaozhou
- * @date 2021/7/2
+ * @date 2021/9/29
  */
 public class ShellUtil {
 
@@ -15,12 +15,12 @@ public class ShellUtil {
                 command
         }, null, dir);
         if (showDir) {
-            System.out.println("shell > cd " + dir.getAbsolutePath());
+            System.out.println("$ > cd " + dir.getAbsolutePath());
         }
-        System.out.println("shell > " + command);
+        System.out.println("$ > " + command);
         int status = process.waitFor();
         if (status != 0) {
-            System.err.println("shell 执行失败: " + command + " " + dir.getAbsolutePath());
+            System.err.println("$ execute error");
         }
     }
 

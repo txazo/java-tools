@@ -18,9 +18,9 @@
     <url>https://github.com/txazo/java-tools</url>
 
     <modules>
-        <module>java-tools-hug-move</module>
         <module>java-tools-leetcode</module>
         <module>java-tools-mvc</module>
+        <module>java-tools-util</module>
         <module>spring-boot-starter</module>
     </modules>
 
